@@ -5,21 +5,22 @@
   .controller('LunchCheckController', LunchCheckController);
   LunchCheckController.$inject = ['$scope'];
   function LunchCheckController ($scope){
-    //$scope.message = getMessage($scope.lunchMenu);
     $scope.getMsg = function (){
-      $scope.message = getMessage ($scope.lunchMenu);
-    }
-  }
-
-  function getMessage (items){
-    if (items == undefined || items == ""){
-      return "Please enter data first";
-    }
-    var MenuLength = items.split(",").length;
-    if (MenuLength >0 && MenuLength< 4 ){
-      return "Enjoy!";
-    } else if (MenuLength >=4){
-      return "Too Much!";
+      var items = $scope.lunchMenu;
+      if (items == undefined || items == ''){
+        $scope.message = "Please enter data first";
+        $scope.msgStyle = "text-danger";
+        $scope.inputStyle = "border-color:red;";
+      } else {
+        $scope.msgStyle = "text-success";
+        $scope.inputStyle = "border-color:green;";
+        var MenuLength = items.split(",").length;
+        if (MenuLength >0 && MenuLength< 4 ){
+          $scope.message = "Enjoy!";
+        } else if (MenuLength >=4){
+          $scope.message = "Too Much!";
+        }
+      }
     }
   }
 
